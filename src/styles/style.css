@@ -28,7 +28,16 @@
     padding: 12px 20px;
     gap: 16px;
   }
-  
+  /* Logo */
+  .logo {
+    height: 48px;    /* vừa với navbar */
+    transform: scale(4);  /* phóng to riêng logo */
+    transform-origin: left center; /* phóng to từ mép trái */
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+  }
   /* Menu */
   .site-nav {
     display: flex;
