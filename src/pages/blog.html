@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bài viết · Personal Blog</title>
+<link rel="icon" href="/public/favicon.ico" />
+<link rel="stylesheet" href="/src/styles/style.css" />
+<link rel="stylesheet" href="/src/styles/theme.css" />
+<link rel="stylesheet" href="/src/styles/responsive.css" />
+</head>
+<body>
+<header id="site-header"></header>
+<nav id="site-nav"></nav>
+
+
+<main class="container">
+<section class="blog">
+<h1>Blog</h1>
+   <!-- Skeleton hiển thị khi đang load -->
+   <div id="post-list-skeleton" class="post-list">
+    <div class="post-item skeleton"></div>
+    <div class="post-item skeleton"></div>
+    <div class="post-item skeleton"></div>
+  </div>
+<div id="post-list" class="post-list" hidden></div>
+
+
+<!-- Khu vực hiển thị bài viết đơn lẻ khi có ?p=slug -->
+<article id="post-view" class="post-view" hidden>
+<h1 id="post-title"></h1>
+<p class="muted" id="post-meta"></p>
+<img id="post-thumb" class="post-thumb" alt="" hidden />
+<div id="post-content" class="markdown-body"></div>
+</article>
+</section>
+</main>
+
+
+<footer id="site-footer"></footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
+<script src="/src/scripts/main.js" type="module" defer></script>
+<script src="/src/scripts/blog.js" type="module" defer></script>
+</body>
+</html>

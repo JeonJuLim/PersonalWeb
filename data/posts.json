@@ -1,0 +1,16 @@
+[
+    {
+    "title": "Hello, World! 👋",
+    "slug": "hello-world",
+    "date": "2025-09-15",
+    "thumbnail": "/public/images/hello.jpg",
+    "tags": ["intro"]
+    },
+    {
+    "title": "Bài thứ hai: tips viết Markdown",
+    "slug": "second-post",
+    "date": "2025-09-16",
+    "thumbnail": "/public/images/markdown.jpg",
+    "tags": ["markdown","tips"]
+    }
+    ]
