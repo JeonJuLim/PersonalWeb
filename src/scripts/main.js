@@ -33,16 +33,16 @@ async function loadLatest() {
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 6);
 
-  latestWrap.innerHTML = top
+    latestWrap.innerHTML = top
     .map(
-      (p) => `
-        <article class="card">
+      (p, i) => `
+        <article class="card stacked--${['up','down','left','right'][i % 4]}">
           <a href="/src/pages/blog.html?p=${p.slug}">
-            ${p.thumbnail ? `<img class="thumb" src="${p.thumbnail}" alt="${p.title}">` : ''}
             <div class="pad">
               <h3>${p.title}</h3>
               <p class="muted">${formatDate(p.date)}</p>
             </div>
+            ${p.thumbnail ? `<img class="thumb" src="${p.thumbnail}" alt="${p.title}">` : ''}
           </a>
         </article>
       `
@@ -95,18 +95,25 @@ function setupThemeToggle() {
     applyTheme(next);
   });
 }
+// ✅ Hàm setup footer
+function setupFooter() {
+  // cập nhật năm nếu có placeholder
+  const y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
 
+  // render icon
+  if (window.lucide) {
+    lucide.createIcons();
+  }
+}
 // Init
 window.addEventListener('DOMContentLoaded', async () => {
   // Inject components
   await Promise.all([
     inject('site-header', '/src/components/header.html'),
     inject('site-nav', '/src/components/nav.html'),
-    inject('site-footer', '/src/components/footer.html').then(() => {
-      const y = document.getElementById('year');
-      if (y) y.textContent = new Date().getFullYear();
-    }),
-  ]);
+    inject('site-footer', '/src/components/footer.html').then(setupFooter)
+    ]);
 
   // ⚠️ Lucide render icon sau khi đã inject xong
   if (window.lucide) {

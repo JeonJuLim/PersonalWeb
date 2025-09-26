@@ -12,3 +12,7 @@
     }, { rootMargin: '0px 0px -10% 0px', threshold: .1 });
     items.forEach(el=>io.observe(el));
     })();
+
+
+
+    
