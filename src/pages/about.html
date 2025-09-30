@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Giới thiệu · Personal Blog</title>
-<link rel="icon" href="/public/favicon.ico" />
-<link rel="stylesheet" href="/src/styles/style.css" />
-<link rel="stylesheet" href="/src/styles/theme.css" />
-<link rel="stylesheet" href="/src/styles/responsive.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Giới thiệu · Personal Blog</title>
+  <link rel="icon" href="/public/favicon.ico" />
+  <link rel="stylesheet" href="/src/styles/style.css" />
+  <link rel="stylesheet" href="/src/styles/theme.css" />
+  <link rel="stylesheet" href="/src/styles/responsive.css" />
 </head>
 <body>
-<header id="site-header"></header>
-<nav id="site-nav"></nav>
+  <header id="site-header"></header>
+  <nav id="site-nav"></nav>
 
+  <main id="about-container" class="container">
+    <!-- Nội dung sẽ load từ about.md -->
+    <article id="about-content"></article>
+  
+    <!-- Mục lục -->
+    <aside id="about-toc" class="sidebar">
+      <div class="widget">
+        <h3>Mục lục</h3>
+        <ul id="toc-list"></ul>
+      </div>
+    </aside>
+  </main>
 
-<main class="container">
-<section>
-<h1>Giới thiệu</h1>
-<p>Một blog tĩnh siêu gọn: không backend, không database, dễ deploy.</p>
-</section>
-</main>
+  
 
+  <footer id="site-footer"></footer>
 
-<footer id="site-footer"></footer>
-
-
-<script src="/src/scripts/main.js" type="module" defer></script>
+  <script src="/src/scripts/main.js" type="module" defer></script>
+  <script src="/src/scripts/about.js" type="module" defer></script>
 </body>
 </html>

@@ -1,16 +1,17 @@
 [
     {
-    "title": "Hello, World! 👋",
-    "slug": "hello-world",
-    "date": "2025-09-15",
-    "thumbnail": "/public/images/hello.jpg",
-    "tags": ["intro"]
+      "title": "Hello World",
+      "excerpt": "Bài viết đầu tiên...",
+      "date": "2025-09-29",
+      "thumb": "/public/images/hello.jpg",
+      "url": "hello-world"
     },
     {
-    "title": "Bài thứ hai: tips viết Markdown",
-    "slug": "second-post",
-    "date": "2025-09-16",
-    "thumbnail": "/public/images/markdown.jpg",
-    "tags": ["markdown","tips"]
+      "title": "Second Post",
+      "excerpt": "Bài viết thứ hai...",
+      "date": "2025-09-30",
+      "thumb": "/public/images/second.jpg",
+      "url": "second-post"
     }
-    ]
+  ]
+  

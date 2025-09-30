@@ -288,3 +288,223 @@
     gap: 12px;
   }
 }
+/* =================== PHẦN ABOUT =================== */
+
+#about-container {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+/* Nội dung chính */
+#about-content {
+  padding: 2.5rem;
+  border-radius: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  line-height: 1.7;
+  color: var(--text);
+}
+
+#about-content h1 {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+  color: var(--primary);
+}
+
+#about-content h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  border-left: 4px solid var(--primary);
+  padding-left: 0.8rem;
+  scroll-margin-top: 100px; /* tránh header che */
+}
+
+#about-content h3 {
+  margin-top: 1.8rem;
+  margin-bottom: 0.6rem;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+#about-content p {
+  font-size: 1rem;
+  color: var(--text-muted, #555);
+}
+
+/* Mục lục */
+#about-toc .widget {
+  position: sticky;
+  top: 100px;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+#about-toc h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+#about-toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#about-toc li {
+  margin-bottom: 0.6rem;
+}
+
+#about-toc a {
+  display: block;
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  color: var(--text);
+  transition: all 0.25s ease;
+}
+
+#about-toc a:hover {
+  background: var(--surface-2);
+  color: var(--primary);
+}
+
+#about-toc a.active {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  font-weight: 600;
+}
+
+/* Responsive cho about */
+@media (max-width: 992px) {
+  #about-container {
+    grid-template-columns: 1fr;
+    padding: 2.5rem 1.2rem;
+  }
+  #about-toc {
+    margin-top: 2rem;
+  }
+}
+/* =================== BLOG PAGE =================== */
+
+#blog-container {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+/* Post list */
+#post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.post-card {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.8rem;
+  border-radius: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.post-thumb {
+  width: 220px;
+  height: auto;
+  border-radius: 0.8rem;
+  object-fit: cover;
+}
+
+.post-content {
+  flex: 1;
+}
+
+.post-content h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.6rem;
+}
+
+.post-content h2 a {
+  text-decoration: none;
+  color: var(--text);
+  transition: color 0.2s ease;
+}
+
+.post-content h2 a:hover {
+  color: var(--primary);
+}
+
+.post-content .excerpt {
+  color: var(--text-muted, #555);
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.btn.small {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+/* Sidebar widget */
+.sidebar .widget {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.sidebar h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  #blog-container {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.2rem;
+  }
+  .post-card {
+    flex-direction: column;
+  }
+  .post-thumb {
+    width: 100%;
+  }
+}
