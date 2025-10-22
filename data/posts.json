@@ -1,17 +1,114 @@
 [
-    {
-      "title": "Hello World",
-      "excerpt": "Bài viết đầu tiên...",
-      "date": "2025-09-29",
-      "thumb": "/public/images/hello.jpg",
-      "url": "hello-world"
-    },
-    {
-      "title": "Second Post",
-      "excerpt": "Bài viết thứ hai...",
-      "date": "2025-09-30",
-      "thumb": "/public/images/second.jpg",
-      "url": "second-post"
-    }
-  ]
-  
+  {
+    "slug": "1KNJava_JS",
+    "title": "Kiến Thức Nền Java & JavaScript",
+    "excerpt": "Tổng quan nền tảng về Java và JavaScript, giúp phân biệt rõ hai ngôn ngữ này.",
+    "date": "2025-10-01",
+    "thumb": "/public/pictures/blog1.png",
+    "tags": ["Java", "JavaScript", "Personal"]
+  },
+  {
+    "slug": "blog2",
+    "title": "Java Xử Lý Ngoại Lệ",
+    "excerpt": "Cách xử lý ngoại lệ trong Java: try-catch-finally, throws và custom exceptions.",
+    "date": "2025-10-02",
+    "thumb": "/public/pictures/blog2.png",
+    "tags": ["Java"]
+  },
+  {
+    "slug": "blog3",
+    "title": "JS Bắt Động Event",
+    "excerpt": "Giới thiệu cơ chế event handling trong JavaScript và ví dụ ứng dụng thực tế.",
+    "date": "2025-10-03",
+    "thumb": "/public/pictures/blog3.png",
+    "tags": ["JavaScript"]
+  },
+  {
+    "slug": "blog4",
+    "title": "Java Generics Cơ Bản",
+    "excerpt": "Hiểu và sử dụng Generics trong Java để viết code an toàn, tái sử dụng cao.",
+    "date": "2025-10-04",
+    "thumb": "/public/pictures/blog4.png",
+    "tags": ["Java"]
+  },
+  {
+    "slug": "blog5",
+    "title": "Hàm Function Trong JS",
+    "excerpt": "Phân tích sâu về khai báo, gọi và truyền tham số trong function của JavaScript.",
+    "date": "2025-10-05",
+    "thumb": "/public/pictures/blog5.png",
+    "tags": ["JavaScript"]
+  },
+  {
+    "slug": "blog6",
+    "title": "JS Bộ Nhớ & Garbage Collector",
+    "excerpt": "Cơ chế quản lý bộ nhớ và dọn rác (GC) trong JavaScript, tối ưu hiệu năng.",
+    "date": "2025-10-06",
+    "thumb": "/public/pictures/blog6.png",
+    "tags": ["JavaScript"]
+  },
+  {
+    "slug": "blog7",
+    "title": "Event Loop Trong JS",
+    "excerpt": "Tìm hiểu sâu cơ chế event loop và call stack trong JavaScript runtime.",
+    "date": "2025-10-07",
+    "thumb": "/public/pictures/blog7.png",
+    "tags": ["JavaScript"]
+  },
+  {
+    "slug": "blog8",
+    "title": "Java Lỗi Thường Gặp",
+    "excerpt": "Tổng hợp các lỗi thường gặp trong Java và cách khắc phục hiệu quả.",
+    "date": "2025-10-08",
+    "thumb": "/public/pictures/blog8.png",
+    "tags": ["Java"]
+  },
+  {
+    "slug": "blog9",
+    "title": "JS Các Loại Biến & Scope",
+    "excerpt": "So sánh var, let, const và phạm vi hoạt động của biến trong JavaScript.",
+    "date": "2025-10-09",
+    "thumb": "/public/pictures/blog9.png",
+    "tags": ["JavaScript"]
+  },
+  {
+    "slug": "blog10",
+    "title": "Java & JS Lập Trình Hướng Đối Tượng",
+    "excerpt": "So sánh cách triển khai OOP giữa Java và JavaScript qua ví dụ cụ thể.",
+    "date": "2025-10-10",
+    "thumb": "/public/pictures/blog10.png",
+    "tags": ["Java", "JavaScript"]
+  },
+  {
+    "slug": "blog11",
+    "title": "GG Colab Python Cơ Bản",
+    "excerpt": "Hướng dẫn khởi đầu với Google Colab cho lập trình Python nhanh gọn.",
+    "date": "2025-10-11",
+    "thumb": "/public/pictures/blog11.png",
+    "tags": ["Python"]
+  },
+  {
+    "slug": "blog12",
+    "title": "Học Máy Tổng Quan",
+    "excerpt": "Giới thiệu nền tảng về học máy, dữ liệu huấn luyện và mô hình cơ bản.",
+    "date": "2025-10-12",
+    "thumb": "/public/pictures/blog12.png",
+    "tags": ["AI", "MachineLearning"]
+  },
+  {
+    "slug": "blog13",
+    "title": "Học Sâu & Mạng Neural",
+    "excerpt": "Tổng quan về Deep Learning, mạng neural, và ứng dụng thực tế.",
+    "date": "2025-10-13",
+    "thumb": "/public/pictures/blog13.png",
+    "tags": ["AI", "DeepLearning"]
+  },
+  {
+    "slug": "blog14",
+    "title": "Kỹ Thuật Tối Ưu Mô Hình",
+    "excerpt": "Các kỹ thuật fine-tuning và regularization giúp mô hình hoạt động tốt hơn.",
+    "date": "2025-10-14",
+    "thumb": "/public/pictures/blog14.png",
+    "tags": ["AI", "Optimization"]
+  }
+]

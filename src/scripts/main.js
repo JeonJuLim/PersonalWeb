@@ -106,27 +106,76 @@ function setupFooter() {
     lucide.createIcons();
   }
 }
-// Init
-window.addEventListener('DOMContentLoaded', async () => {
-  // Inject components
-  await Promise.all([
-    inject('site-header', '/src/components/header.html'),
-    inject('site-nav', '/src/components/nav.html'),
-    inject('site-footer', '/src/components/footer.html').then(setupFooter)
-    ]);
 
-  // ⚠️ Lucide render icon sau khi đã inject xong
-  if (window.lucide) {
-    lucide.createIcons();
+// === 🎵 Setup âm nhạc ===
+function setupMusic() {
+  const btn = document.getElementById("music-toggle");
+  const icon = btn?.querySelector("i");
+  const music = document.getElementById("bg-music");
+  if (!btn || !icon || !music) {
+    console.warn("🎧 Không tìm thấy phần tử âm thanh trong DOM");
+    return;
   }
 
-  // ✅ Sau khi nav inject xong -> setup toggle (logo chắc chắn đã có)
-  setupThemeToggle();
+  let isMuted = true;
 
-  // ✅ Cập nhật logo theo theme hiện tại
+  // Autoplay (mute)
+  music.play().then(() => {
+    console.log("🎶 Nhạc phát ở chế độ mute");
+  }).catch(() => {
+    console.warn("⚠️ Autoplay bị chặn — sẽ phát sau click đầu tiên");
+  });
+
+  // Khi người dùng click đầu tiên → bật nhạc
+  document.body.addEventListener(
+    "click",
+    () => {
+      if (music.paused) music.play();
+      if (isMuted) {
+        music.muted = false;
+        music.volume = 0.4;
+        isMuted = false;
+        icon.setAttribute("data-lucide", "volume-2");
+        btn.classList.add("music-active");
+        lucide.createIcons();
+        console.log("🔊 Nhạc bật");
+      }
+    },
+    { once: true }
+  );
+
+  // Nút bật/tắt nhạc
+  btn.addEventListener("click", () => {
+    if (isMuted) {
+      music.muted = false;
+      music.volume = 0.4;
+      icon.setAttribute("data-lucide", "volume-2");
+      btn.classList.add("music-active");
+    } else {
+      music.muted = true;
+      icon.setAttribute("data-lucide", "volume-x");
+      btn.classList.remove("music-active");
+    }
+    isMuted = !isMuted;
+    lucide.createIcons();
+  });
+}
+
+// === ⚙️ Khởi tạo toàn trang ===
+window.addEventListener('DOMContentLoaded', async () => {
+  await inject('site-header', '/src/components/header.html');
+  await inject('site-nav', '/src/components/nav.html');
+  await inject('site-footer', '/src/components/footer.html');
+  setupFooter();
+
+  if (window.lucide) lucide.createIcons();
+
+  setupThemeToggle();
+  setupMusic(); // 🎶 gọi ngay sau khi nav đã được inject
+
   const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
   updateLogo(currentTheme);
-
-  // Load bài viết
   loadLatest();
 });
+
+ 

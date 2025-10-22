@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio · Nguyễn Hoàng Ngọc Trâm</title>
+
+    <!-- ✅ Đặt base path để load đúng ảnh, pdf, js -->
+    <base href="./" />
+
+    <!-- ✅ SEO meta -->
+    <meta
+      name="description"
+      content="Portfolio của Nguyễn Hoàng Ngọc Trâm — AI & Frontend Developer, đam mê học hỏi và sáng tạo sản phẩm công nghệ ý nghĩa."
+    />
+    <meta property="og:title" content="Ngọc Trâm · Portfolio" />
+    <meta
+      property="og:description"
+      content="AI & Frontend Developer | Passion for Machine Learning, Design & Creative Tech"
+    />
+    <meta property="og:image" content="./CV_NguyenTram.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="vi_VN" />
+
+    <!-- ✅ Favicon -->
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
+
+    <!-- ✅ CSS build -->
+    <link rel="stylesheet" crossorigin href="./assets/index-DShqDqjQ.css" />
+
+    <!-- ✅ JS build -->
+    <script type="module" crossorigin src="./assets/index-CQxH4rVj.js"></script>
+
+    <!-- ✅ Fallback style (phòng khi JS chưa load xong) -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        background: linear-gradient(135deg, #f8e7ff 0%, #eaf4ff 100%);
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      #root {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      noscript {
+        text-align: center;
+        color: #555;
+        padding: 40px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ✅ React root -->
+    <div id="root">
+      <noscript>Vui lòng bật JavaScript để xem nội dung portfolio của Ngọc Trâm 💜</noscript>
+    </div>
+
+    <!-- ✅ Kiểm tra tài nguyên (debug nhẹ) -->
+    <script>
+      const requiredAssets = [
+        "./anh1.png",
+        "./CV_NguyenTram.png",
+        "./certificates/chunghnan_106419.png",
+        "./certificates/chunghnan_122450.png",
+        "./certificates/JavaScriptEssentials2.pdf",
+        "./certificates/JavaScriptEssentials3.pdf",
+        "./certificates/NetworkingBasics.pdf",
+      ];
+
+      requiredAssets.forEach((url) => {
+        const img = new Image();
+        img.src = url;
+        img.onerror = () => console.warn("⚠️ Không tìm thấy:", url);
+      });
+    </script>
+  </body>
+</html>

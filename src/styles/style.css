@@ -30,6 +30,20 @@
   background: var(--surface-2);
   border: 1px solid var(--border);
 }
+.tag,
+.sidebar .tags span {
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.tag.active,
+.sidebar .tags span.active {
+  background: var(--accent);
+  color: #f3a4f1;
+  box-shadow: 0 0 0 2px var(--accent-light, #873384);
+}
+
 
 /* Skeleton loading */
 .skeleton {
@@ -53,21 +67,38 @@
 }
 
 /* NAVIGATION */
+/* =================== NAVIGATION (Transparent Frosted) =================== */
 .site-nav-wrap {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 50;
+
+  /* Hiệu ứng kính mờ */
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
+
 .nav-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 56px;
-  padding: 12px 20px;
-  gap: 16px;
+  min-height: 60px;
+  padding: 12px 24px;
 }
+
+/* Dark mode */
+:root[data-theme="dark"] .site-nav-wrap {
+  background: rgba(15, 15, 15, 0.55);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+}
+
 /* Logo */
 .logo {
   height: 48px;
@@ -78,7 +109,8 @@
   display: flex;
   align-items: center;
 }
-/* Menu */
+
+/* Menu link */
 .site-nav {
   display: flex;
   gap: 24px;
@@ -90,11 +122,14 @@
   text-decoration: none;
   color: var(--text);
   font-weight: 500;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 .site-nav a:hover {
-  color: var(--primary);
+  color: #b553ed;
+  text-shadow: 0 0 8px rgba(181, 83, 237, 0.5);
 }
-/* Icon actions */
+
+/* Icon buttons */
 .nav-icons {
   display: flex;
   gap: 12px;
@@ -109,40 +144,10 @@
   cursor: pointer;
   color: var(--icon-color, var(--text));
   font-size: 1.25rem;
-}
-.icon-btn:hover {
-  color: var(--primary);
-}
-
-/* Footer */
-.site-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  border-top: 1px solid var(--border-color, #ddd);
-  font-size: 0.9rem;
-  background: var(--footer-bg, transparent);
-}
-.footer-left .logo {
-  font-weight: bold;
-  font-style: italic;
-  font-size: 1.2rem;
-}
-.footer-center {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-style: italic;
-}
-.footer-right a {
-  margin-left: 1rem;
-  color: inherit;
-  text-decoration: none;
   transition: color 0.2s ease;
 }
-.footer-right a:hover {
-  color: var(--accent-color, #0077ff);
+.icon-btn:hover {
+  color: #b553ed;
 }
 
 /* =================== MAIN LAYOUT =================== */
@@ -164,8 +169,9 @@
   gap: 2rem;
 }
 
-/* Card bài viết */
-#latest-posts > .card {
+/* Cả hai nơi đều được áp dụng */
+#latest-posts > .card,
+#post-list > .post-card {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -177,35 +183,14 @@
   background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-
   transition: transform 320ms var(--easing-standard),
               box-shadow 320ms var(--easing-standard),
               background 320ms var(--easing-standard);
   z-index: 1;
 }
 
-/* Nội dung trong card */
-#latest-posts .card-content {
-  flex: 1;
-}
-#latest-posts .card h3 {
-  font-size: 1.6rem;
-  margin-bottom: 0.6rem;
-}
-#latest-posts .card p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--text-muted, #555);
-}
-#latest-posts .card img.thumb {
-  width: 200px;
-  height: auto;
-  border-radius: 0.8rem;
-  object-fit: cover;
-}
-
-/* Hover stacked 4 lớp */
-#latest-posts > .card:hover {
+#latest-posts > .card:hover,
+#post-list > .post-card:hover {
   transform: translateY(-8px);
   background: linear-gradient(135deg, #fbc8d4, #9795f0);
   box-shadow:
@@ -214,21 +199,26 @@
     18px 18px 0 rgba(151, 149, 240, 0.15),
     24px 24px 0 rgba(151, 149, 240, 0.08);
 }
-/* Tắt hiệu ứng hover trên màn nhỏ */
+
+/* Tắt hover trên màn nhỏ */
 @media (max-width: 768px) {
-  #latest-posts > .card {
+  #latest-posts > .card,
+  .post-card {
     flex-direction: column;
     align-items: flex-start;
   }
-  #latest-posts > .card:hover {
+  #latest-posts > .card:hover,
+  .post-card:hover {
     transform: none;
     background: var(--surface);
     box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   }
-  #latest-posts .card img.thumb {
+  #latest-posts .card img.thumb,
+  .post-card img.post-thumb {
     width: 100%;
   }
 }
+
 
 /* Sidebar */
 .sidebar .widget {
@@ -508,3 +498,329 @@
     width: 100%;
   }
 }
+/* =================== HERO SECTION =================== */
+#hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 4rem 2rem;
+
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+
+
+.hero-content {
+  flex: 1.2;
+}
+
+.hero-content h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.hero-content .highlight {
+  color: #f85b9c
+}
+
+.hero-content p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text); /* Dùng màu chữ theo theme */
+  margin-bottom: 1.5rem;
+}
+
+/* Nếu bạn muốn đoạn mô tả mờ hơn một chút, dùng --muted thay vì --text */
+.hero-content p.muted,
+.hero-content p span.muted {
+  color: var(--muted);
+}
+
+.hero-connect {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.hero-connect input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.hero-connect input:focus {
+  border-color: var(--primary);
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+/* HERO IMAGE FIX */
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 360px;          /* Giới hạn chiều ngang tối đa */
+  aspect-ratio: 1 / 1;       /* Tự giữ khung vuông */
+  object-fit: cover;         /* Ảnh tự zoom để lấp đầy khung */
+  border-radius: 50%;        /* Bo tròn hoàn toàn */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: transform 0.4s ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.05);    /* Zoom nhẹ khi hover cho sinh động */
+}
+
+/* Responsive nhỏ hơn */
+@media (max-width: 992px) {
+  .hero-image img {
+    max-width: 240px;
+  }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  #hero-section {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  .hero-connect {
+    flex-direction: column;
+  }
+  .hero-connect input, .hero-connect .btn {
+    width: 100%;
+  }
+}
+.badge:hover img {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+/* =================== BLOG POST DETAIL CARD (trái - phải) =================== */
+
+#post-wrapper {
+  /* bỏ justify-content: center; để card nằm bên trái */
+  grid-column: 1; /* nửa trái của layout */
+  display: block;
+  padding: 0;
+}
+
+#post-card {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  padding: 3rem 2.5rem;
+  line-height: 1.8;
+  color: var(--text);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Style nội dung */
+#post-card h1,
+#post-card h2,
+#post-card h3 {
+  color: var(--primary);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+#post-card p {
+  color: var(--text-muted, #555);
+  margin-bottom: 1rem;
+}
+
+#post-card img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: 0.8rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+#post-card blockquote {
+  border-left: 4px solid var(--primary);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  border-radius: 0.6rem;
+}
+
+#post-card pre {
+  background: var(--surface-2);
+  padding: 1rem;
+  border-radius: 0.8rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+/* Responsive: khi nhỏ, card chiếm 100% */
+@media (max-width: 992px) {
+  #blog-container {
+    grid-template-columns: 1fr;
+  }
+  #post-card {
+    padding: 2rem 1.5rem;
+  }
+}
+/* =============================================== Footer layout === */
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 25px 60px;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+.site-footer {
+  background-color: transparent !important;
+}
+
+/* --- Logo bên trái --- */
+.site-footer .brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.site-footer .logo {
+  height: 30px;
+  display: inline-block !important;
+  vertical-align: middle;
+}
+
+/* --- Text giữa --- */
+.footer-center {
+  text-align: center;
+  flex: 1;
+  font-style: italic;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.footer-center strong {
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* --- Icon bên phải --- */
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+}
+
+.footer-right a {
+  color: var(--text);
+  font-size: 20px;
+  transition: opacity 0.2s ease;
+}
+
+.footer-right a:hover {
+  opacity: 0.6;
+}
+
+/* --- Responsive --- */
+@media (max-width: 700px) {
+  .site-footer {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .footer-center {
+    order: 2;
+  }
+
+  .footer-right {
+    order: 3;
+  }
+}
+
+/*===========figma===========*/
+
+.figma-wrapper {
+  width: 100%;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+}
+
+.figma-frame {
+  width: 100%;
+  min-height: 100vh;
+  border: none;
+  background: transparent;
+  transform-origin: top center;
+}
+/* 🎵 Hiệu ứng sáng tím cho nút nhạc khi bật */
+.music-active {
+  color: #a855f7 !important;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+  border-radius: 50%;
+  animation: pulse-glow 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.5),
+                0 0 14px rgba(236, 72, 153, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(236, 72, 153, 0.7),
+                0 0 30px rgba(168, 85, 247, 0.8);
+    transform: scale(1.1);
+  }
+}
+
+
