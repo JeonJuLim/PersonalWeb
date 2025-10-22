@@ -1,94 +1,249 @@
+/* === Font setup === */
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap');
+
+:root {
+  --font-sans: "Nunito Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
 /* ======= Theme Variables ======= */
 :root {
-    /* Color */
-    --bg: #ffffff;
-    --text: #0f172a;
-    --muted: #64748b;
-    --border: #e5e7eb;
-    --primary: #2563eb;
-    --primary-contrast: #ffffff;
-    --surface: #ffffff;
-    --surface-2: #f8fafc;
-    --icon-color: #111;
-  
-    /* Typography */
-    --font-sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, "Apple Color Emoji", "Segoe UI Emoji";
-    --fs-xxl: clamp(28px, 5vw, 44px);
-    --fs-xl: clamp(22px, 3.6vw, 32px);
-    --fs-lg: 20px;
-    --fs-md: 16px;
-    --fs-sm: 14px;
-    --fs-xs: 12px;
-  
-    /* Spacing & Radius */
-    --space-1: 8px;
-    --space-2: 12px;
-    --space-3: 16px;
-    --space-4: 24px;
-    --space-5: 32px;
-    --space-6: 48px;
-    --radius-sm: 10px;
-    --radius-md: 14px;
-    --radius-lg: 20px;
-  
-    /* Shadow */
-    --shadow-1: 0 1px 2px rgba(0,0,0,.05);
-    --shadow-2: 0 6px 20px rgba(0,0,0,.08);
-  }
-  
-  /* ======= Dark mode via media query ======= */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0b0b0b;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --border: #27272a;
-      --surface: #111214;
-      --surface-2: #0f1317;
-  
-      --shadow-1: 0 1px 2px rgba(0,0,0,.5);
-      --shadow-2: 0 6px 20px rgba(0,0,0,.45);
-  
-      --icon-color: #f3f4f6;
-    }
-  }
-  
-  /* ======= Manual theme override ======= */
-  :root[data-theme="dark"] {
-    --bg: #0b0b0b;
+  /* Color */
+  --bg: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e5e7eb;
+  --primary: #3e4049;
+  --primary-contrast: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --icon-color: #111;
+
+  /* Typography */
+  --font-sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, "Apple Color Emoji", "Segoe UI Emoji";
+  --fs-xxl: clamp(28px, 5vw, 44px);
+  --fs-xl: clamp(22px, 3.6vw, 32px);
+  --fs-lg: 20px;
+  --fs-md: 16px;
+  --fs-sm: 14px;
+  --fs-xs: 12px;
+
+  /* Spacing & Radius */
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  /* Shadow */
+  --shadow-1: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-2: 0 6px 20px rgba(0,0,0,.08);
+}
+
+/* ======= Dark theme via media query ======= */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
     --text: #e5e7eb;
-    --muted: #94a3b8;
-    --border: #27272a;
-    --surface: #111214;
-    --surface-2: #0f1317;
-  
+    --muted: #a1a1aa;
+    --border: #2a2a2a;
+    --surface: #111111;
+    --surface-2: #191919;
     --shadow-1: 0 1px 2px rgba(0,0,0,.5);
     --shadow-2: 0 6px 20px rgba(0,0,0,.45);
-  
     --icon-color: #f3f4f6;
   }
-  
-  :root[data-theme="light"] {
-    --icon-color: #111;
-  }
-  
-  /* ======= Apply core colors ======= */
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-sans);
-  }
-  
-  img {
-    filter: saturate(1.05);
-  }
-  
-  a {
-    color: var(--primary);
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
+}
+
+/* ======= Manual Theme Override (Dark) ======= */
+:root[data-theme="dark"] {
+  --bg: #000000;
+  --text: #f1f1f1;
+  --muted: #b0b0b0;
+  --border: rgba(255, 255, 255, 0.08);
+  --surface: #111111;
+  --surface-2: #1b1b1b;
+  --primary: #ffffff;
+  --primary-contrast: #000000;
+  --icon-color: #f3f4f6;
+
+  --nav-bg: rgba(10, 10, 10, 0.85);
+  --footer-bg: #0a0a0a;
+}
+
+/* ======= Manual Theme Override (Light) ======= */
+:root[data-theme="light"] {
+  --icon-color: #111;
+}
+
+/* ======= Core ======= */
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* LIGHT MODE BACKGROUND */
+:root[data-theme="light"] body {
+  background: radial-gradient(at 20% 20%, #f9d3ff 0%, transparent 60%),
+              radial-gradient(at 80% 10%, #d3e8ff 0%, transparent 60%),
+              radial-gradient(at 50% 80%, #fff0d3 0%, transparent 60%),
+              #eaeaf3;
+}
+
+/* DARK MODE BACKGROUND (Gradient đen → tím) */
+:root[data-theme="dark"] body {
+  background: linear-gradient(32deg, rgba(0, 0, 0, 1) 72%, rgba(181, 83, 237, 1) 100%);
+}
+
+/* Hiệu ứng mờ nền */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: inherit;
+  filter: blur(80px);
+  z-index: -1;
+}
+
+/* ===== FIX: Remove global blur overlay in dark mode ===== */
+:root[data-theme="dark"] body::before {
+  content: none; /* tắt layer mờ phủ toàn trang để lộ gradient */
+}
+
+/* Ảnh */
+img {
+  filter: saturate(1.05);
+}
+
+/* Liên kết */
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+a:hover {
+  color: #b553ed;
+  text-shadow: 0 0 6px rgba(181, 83, 237, 0.6);
+}
+
+/* ======= Hero Section (Dark Mode) ======= */
+:root[data-theme="dark"] #hero-section {
+  background: rgba(25, 25, 25, 0.55);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+}
+
+/* ======= Card Post (Dark Mode) ======= */
+:root[data-theme="dark"] .card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  box-shadow: var(--shadow-1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+:root[data-theme="dark"] .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px rgba(181, 83, 237, 0.3);
+}
+
+/* ======= Heading Colors (Dark Mode) ======= */
+:root[data-theme="dark"] h3,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] h1 {
+  color: #ffffff;
+}
+
+/* ======= Muted Text (Dark Mode) ======= */
+:root[data-theme="dark"] .muted {
+  color: #a1a1a1;
+}
+
+/* ======= Shared Frosted-Glass Section Backgrounds ======= */
+:root[data-theme="dark"] #hero-section,
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .post-card,
+:root[data-theme="dark"] .sidebar .widget,
+:root[data-theme="dark"] #about-content,
+:root[data-theme="dark"] #about-toc .widget {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+:root {
+  --surface: #f9fafb;
+  --text: #111;
+  --border: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+  --surface: #0d0d0f;
+  --text: #f2f2f2;
+  --border: rgba(255, 255, 255, 0.1);
+}
+/*==========Blog Styles==========*/
+/* ======= Card Post (Dark Theme Only) ======= */
+:root[data-theme="dark"] #post-list .post-card,
+:root[data-theme="dark"] #latest-posts .card {
+  background: #212121 !important; /* nền tối cố định */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+}
+
+/*========footer========*/
+/* === Frosted Glass Footer (Light + Dark) === */
+/* === Footer fix: giữ nền trong suốt, không bị đen trong dark mode === */
+:root[data-theme="dark"] {
+  --footer-bg: transparent !important;
+}
+
+/* Light mode */
+:root[data-theme="light"] .site-footer {
+  background: rgba(255, 255, 255, 0.45);
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Dark mode */
+/* === REAL GLASS FOOTER FIX === */
+
+/* Xóa nền đặc bị kế thừa */
+:root[data-theme="dark"] {
+  --footer-bg: transparent !important;
+  --surface: transparent !important;
+}
+
+/* Footer trong suốt thật sự */
+:root[data-theme="dark"] .site-footer {
+  background: rgba(20, 20, 20, 0.25) !important; /* trong suốt mờ */
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(24px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
+  isolation: isolate; /* tạo layer riêng cho glass hiệu quả */
+  background-clip: padding-box;
+}
+
+/* Light theme đồng bộ */
+:root[data-theme="light"] .site-footer {
+  background: rgba(255, 255, 255, 0.35) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  isolation: isolate;
+}

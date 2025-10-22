@@ -1,92 +1,125 @@
-import { formatDate } from './main.js';
+document.addEventListener("DOMContentLoaded", async () => {
+  const postList = document.querySelector("#post-list");
+  const postWrapper = document.querySelector("#post-wrapper");
+  const postContent = document.querySelector("#post-content");
+  const params = new URLSearchParams(window.location.search);
 
-const $ = (q) => document.querySelector(q);
+  const postSlug = params.get("post");
+  // ---- Cho phép nhiều tag ----
+  let activeTags = params.get("tag") ? params.get("tag").split(",") : [];
 
-function getQuery(key) {
-  const u = new URL(window.location.href);
-  return u.searchParams.get(key);
-}
+  // ========== HÀM HIỂN THỊ DANH SÁCH ==========
+  async function renderPostList(filterTags = []) {
+    try {
+      const res = await fetch("/data/posts.json");
+      let posts = await res.json();
 
-async function loadList() {
-  const listEl = $('#post-list');
-  if (!listEl) return;
+      // Lọc bài viết theo nhiều tag nếu có
+      if (filterTags.length > 0) {
+        posts = posts.filter(p => 
+          p.tags && filterTags.every(tag => p.tags.includes(tag))
+        );
+      }
 
-  try {
-    const res = await fetch('/data/posts.json');
-    const posts = await res.json();
+      postList.innerHTML = "";
 
-    // Render list
-    listEl.innerHTML = posts
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .map(
-        (p) => `
-        <article class="post-item">
-          <h3><a href="/src/pages/blog.html?p=${p.slug}">${p.title}</a></h3>
-          <p class="muted">${formatDate(p.date)}</p>
-        </article>
-      `
-      )
-      .join('');
+      if (posts.length === 0) {
+        postList.innerHTML = `<p>Không có bài viết nào với tag <b>#${filterTags.join(", #")}</b>.</p>`;
+        return;
+      }
 
-    // Ẩn skeleton sau khi load xong
-    const skel = document.getElementById('post-list-skeleton');
-    if (skel) skel.remove();
+      posts.forEach(post => {
+        const card = document.createElement("article");
+        card.classList.add("post-card");
 
-    // Hiện danh sách thật
-    listEl.hidden = false;
-  } catch (err) {
-    console.error('Load posts failed:', err);
-    // Dù lỗi vẫn ẩn skeleton để tránh “kẹt”
-    const skel = document.getElementById('post-list-skeleton');
-    if (skel) skel.remove();
-    listEl.hidden = false;
-    listEl.innerHTML = `<p class="muted">Không thể tải danh sách bài viết.</p>`;
+        card.innerHTML = `
+          <img src="${post.thumb}" alt="${post.title}" class="post-thumb">
+          <div class="post-content">
+            <h2><a href="/src/pages/blog.html?post=${post.slug}">${post.title}</a></h2>
+            <p class="excerpt">${post.excerpt}</p>
+            <div class="meta">
+              <span class="date">📅 ${new Date(post.date).toLocaleDateString("vi-VN")}</span>
+              <a href="/src/pages/blog.html?post=${post.slug}" class="btn small">Đọc tiếp →</a>
+            </div>
+            <div class="tags">
+              ${post.tags?.map(tag => `<span class="tag" data-tag="${tag}">#${tag}</span>`).join("") || ""}
+            </div>
+          </div>
+        `;
+        postList.appendChild(card);
+      });
+
+      document.querySelectorAll(".tag").forEach(tagEl => {
+        tagEl.addEventListener("click", handleTagClick);
+      });
+
+      updateTagHighlight();
+    } catch (err) {
+      postList.innerHTML = `<p>❌ Không thể tải danh sách bài viết.</p>`;
+      console.error(err);
+    }
   }
-}
 
-async function loadPost(slug) {
-  const view = $('#post-view');
-  const t = $('#post-title');
-  const m = $('#post-meta');
-  const c = $('#post-content');
-  const img = $('#post-thumb');
+  // ========== HÀM HIỂN THỊ CHI TIẾT ==========
+  async function renderPostDetail(slug) {
+    postList.style.display = "none";
+    postWrapper.style.display = "flex";
 
-  try {
-    const resMeta = await fetch('/data/posts.json');
-    const all = await resMeta.json();
-    const meta = all.find((x) => x.slug === slug);
-    if (!meta) {
-      window.location.href = '/src/pages/blog.html';
-      return;
+    try {
+      const res = await fetch(`/data/posts/${slug}.md`);
+      const md = await res.text();
+
+      postContent.innerHTML = marked.parse(md);
+      if (window.lucide) lucide.createIcons();
+    } catch (err) {
+      postContent.innerHTML = `<p>❌ Không thể tải bài viết.</p>`;
+      console.error(err);
+    }
+  }
+
+  // ========== XỬ LÝ KHI CLICK TAG ==========
+  function handleTagClick(e) {
+    const tag = e.target.dataset.tag || e.target.textContent.replace("#", "").trim();
+
+    if (activeTags.includes(tag)) {
+      // Nếu tag đã chọn → bỏ chọn
+      activeTags = activeTags.filter(t => t !== tag);
+    } else {
+      // Nếu chưa chọn → thêm vào danh sách
+      activeTags.push(tag);
     }
 
-    t.textContent = meta.title;
-    m.textContent = `${formatDate(meta.date)}${
-      meta.tags ? ' · ' + meta.tags.join(', ') : ''
-    }`;
-    if (meta.thumbnail) {
-      img.src = meta.thumbnail;
-      img.alt = meta.title;
-      img.hidden = false;
+    // Cập nhật URL
+    if (activeTags.length > 0) {
+      history.pushState({}, "", `?tag=${activeTags.join(",")}`);
+    } else {
+      history.pushState({}, "", "/src/pages/blog.html");
     }
 
-    const resMd = await fetch(`/data/posts/${slug}.md`);
-    const md = await resMd.text();
-    c.innerHTML = marked.parse(md); // from CDN
-
-    view.hidden = false;
-  } catch (err) {
-    console.error('Load post failed:', err);
-    view.hidden = false;
-    c.innerHTML = `<p class="muted">Không thể tải nội dung bài viết.</p>`;
+    renderPostList(activeTags);
+    updateTagHighlight();
   }
-}
 
-window.addEventListener('DOMContentLoaded', async () => {
-  const slug = getQuery('p');
-  if (slug) {
-    await loadPost(slug);
+  // ========== HIGHLIGHT TAG ==========
+  function updateTagHighlight() {
+    document.querySelectorAll(".sidebar .tags span, .post-card .tag").forEach(tagEl => {
+      const tag = tagEl.dataset.tag;
+      if (activeTags.includes(tag)) tagEl.classList.add("active");
+      else tagEl.classList.remove("active");
+    });
+  }
+
+  // ========== KHỞI TẠO ==========
+  if (postSlug) {
+    renderPostDetail(postSlug);
   } else {
-    await loadList();
+    postWrapper.style.display = "none";
+    postList.style.display = "grid";
+    renderPostList(activeTags);
   }
+
+  document.querySelectorAll(".sidebar .tags span").forEach(tagEl => {
+    tagEl.dataset.tag = tagEl.textContent.replace("#", "").trim();
+    tagEl.addEventListener("click", handleTagClick);
+  });
 });

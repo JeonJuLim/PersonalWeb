@@ -1,30 +1,125 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Giới thiệu · Personal Blog</title>
-<link rel="icon" href="/public/favicon.ico" />
-<link rel="stylesheet" href="/src/styles/style.css" />
-<link rel="stylesheet" href="/src/styles/theme.css" />
-<link rel="stylesheet" href="/src/styles/responsive.css" />
-</head>
-<body>
-<header id="site-header"></header>
-<nav id="site-nav"></nav>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Giới thiệu · Personal Blog</title>
+    <link rel="icon" href="/public/favicon.ico" />
 
+    <!-- Styles -->
+    <link rel="stylesheet" href="/src/styles/style.css" />
+    <link rel="stylesheet" href="/src/styles/theme.css" />
+    <link rel="stylesheet" href="/src/styles/responsive.css" />
 
-<main class="container">
-<section>
-<h1>Giới thiệu</h1>
-<p>Một blog tĩnh siêu gọn: không backend, không database, dễ deploy.</p>
-</section>
-</main>
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          background: var(--bg, #f7f7f7);
+          overflow-x: hidden;
+        }
+      
+        /* Wrapper chứa iframe */
+        .figma-wrapper {
+          width: 100%;
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          position: relative;
+          overflow: visible;
+          margin-top: 0; /* bỏ khoảng trống */
+        }
+      
+        /* Iframe nhúng từ Figma build */
+        .figma-frame {
+          width: 100%;
+          min-height: 100vh;
+          border: none;
+          background: transparent;
+          overflow: visible;
+          transform-origin: top center;
+          display: block;
+        }
+      
+        /* Khi màn hình lớn, tạo khung mềm và đổ bóng nhẹ */
+        @media (min-width: 1400px) {
+          .figma-frame {
+            max-width: 1440px;
+            margin: 0 auto;
+            border-radius: 20px;
+            box-shadow: 0 0 24px rgba(0, 0, 0, 0.08);
+          }
+        }
+      
+        /* Tránh bị navbar chính đè lên khi header fixed */
+        header,
+        nav {
+          z-index: 1000;
+          position: relative;
+        }
+      </style>
+      
+  </head>
 
+  <body>
+    <!-- Header + Nav -->
+    <header id="site-header"></header>
+    <nav id="site-nav"></nav>
 
-<footer id="site-footer"></footer>
+    <!-- Body: nhúng trang Figma build -->
+    <main class="figma-wrapper">
+      <iframe
+        src="./figma/build/index.html"
+        class="figma-frame"
+        frameborder="0"
+        scrolling="yes"
+      ></iframe>
+    </main>
+    
 
+    <!-- Footer -->
+    <footer id="site-footer"></footer>
 
-<script src="/src/scripts/main.js" type="module" defer></script>
-</body>
+    <!-- Scripts -->
+    <script src="/src/scripts/main.js" type="module"></script>
+
+    <script>
+      const iframe = document.querySelector(".figma-frame");
+      iframe.addEventListener("load", () => {
+        try {
+          const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+          // 1️⃣ Ẩn các phần navbar/header của trang Figma build
+          const possibleNavs = innerDoc.querySelectorAll(
+            "header, nav, .navbar, .top-nav, .menu, .App_header__*, .Header"
+          );
+          possibleNavs.forEach((el) => {
+            el.style.display = "none";
+            el.style.visibility = "hidden";
+            el.style.height = "0";
+          });
+
+          // 2️⃣ Phóng to phần body chính cho full trang
+          const main = innerDoc.querySelector("main, #root, body > div");
+          if (main) {
+            main.style.maxWidth = "100%";
+            main.style.margin = "0";
+            main.style.paddingTop = "0";
+            main.style.transform = "scale(1.15)";
+            main.style.transformOrigin = "top center";
+          }
+
+          // 3️⃣ Reset chiều cao iframe theo nội dung
+          const resizeIframe = () => {
+            iframe.style.height = innerDoc.body.scrollHeight + "px";
+          };
+          resizeIframe();
+          setInterval(resizeIframe, 1000); // cập nhật theo thời gian
+        } catch (e) {
+          console.warn("⚠️ Không thể truy cập nội dung iframe (cross-origin).");
+        }
+      });
+    </script>
+  </body>
 </html>
