@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Blog · Personal Blog</title>
   <link rel="icon" href="/public/favicon.ico" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="/src/styles/style.css" />
   <link rel="stylesheet" href="/src/styles/theme.css" />
   <link rel="stylesheet" href="/src/styles/responsive.css" />
 </head>
+
 <body>
   <header id="site-header"></header>
   <nav id="site-nav"></nav>
@@ -16,7 +19,14 @@
   <main id="blog-container" class="container">
     <!-- Danh sách bài viết -->
     <section id="post-list">
-      <!-- JS sẽ render bài viết tại đây -->
+      <!-- JS sẽ render danh sách bài viết tại đây -->
+    </section>
+
+    <!-- Phần chi tiết bài viết -->
+    <section id="post-wrapper" style="display:none;">
+      <article id="post-card">
+        <div id="post-content"></div>
+      </article>
     </section>
 
     <!-- Sidebar -->
@@ -24,8 +34,8 @@
       <div class="widget">
         <h3>Danh mục</h3>
         <ul>
-          <li><a href="#">hello-world</a></li>
-          <li><a href="#">second-post</a></li>
+          <li><a href="#">hello-wordl</a></li>
+          <li><a href="#">Second Post</a></li>
           <li><a href="#">Life</a></li>
         </ul>
       </div>
@@ -33,10 +43,15 @@
       <div class="widget">
         <h3>Tags</h3>
         <div class="tags">
-          <span>#AI</span>
-          <span>#JavaScript</span>
-          <span>#Python</span>
-          <span>#Personal</span>
+            <span>#AI</span>
+            <span>#JavaScript</span>
+            <span>#Python</span>
+            <span>#Java</span>
+            <span>#MachineLearning</span>
+            <span>#DeepLearning</span>
+            <span>#Optimization</span>
+            <span>#Personal</span>
+          </div>
         </div>
       </div>
     </aside>
@@ -44,7 +59,12 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="/src/scripts/main.js" type="module" defer></script>
-  <script src="/src/scripts/blog.js" type="module" defer></script>
+  <!-- Scripts -->
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module" src="/src/scripts/main.js"></script>
+    <script type="module" src="/src/scripts/blog.js"></script>
+  
 </body>
 </html>
