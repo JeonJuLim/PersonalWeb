@@ -24,7 +24,7 @@
     "tags": ["JavaScript"]
   },
   {
-    "slug": "4JavaGenerics",
+    "slug": "4JavaGeneric",
     "title": "Java Generics Cơ Bản",
     "excerpt": "Hiểu và sử dụng Generics trong Java để viết code an toàn, tái sử dụng cao.",
     "date": "2025-10-04",
@@ -32,7 +32,7 @@
     "tags": ["Java"]
   },
   {
-    "slug": "5JSHamFunction",
+    "slug": "5HamFunction",
     "title": "Hàm Function Trong JS",
     "excerpt": "Phân tích sâu về khai báo, gọi và truyền tham số trong function của JavaScript.",
     "date": "2025-10-05",
@@ -40,7 +40,7 @@
     "tags": ["JavaScript"]
   },
   {
-    "slug": "6JSBoNhoGarbageCollector",
+    "slug": "6JS_BoNho",
     "title": "JS Bộ Nhớ & Garbage Collector",
     "excerpt": "Cơ chế quản lý bộ nhớ và dọn rác (GC) trong JavaScript, tối ưu hiệu năng.",
     "date": "2025-10-06",
@@ -48,7 +48,7 @@
     "tags": ["JavaScript"]
   },
   {
-    "slug": "7JSEventLoop",
+    "slug": "7EventLoop",
     "title": "Event Loop Trong JS",
     "excerpt": "Tìm hiểu sâu cơ chế event loop và call stack trong JavaScript runtime.",
     "date": "2025-10-07",
@@ -64,7 +64,7 @@
     "tags": ["Java"]
   },
   {
-    "slug": "9JSCacLoaiBienScope",
+    "slug": "9JS_CacLoiTG",
     "title": "JS Các Loại Biến & Scope",
     "excerpt": "So sánh var, let, const và phạm vi hoạt động của biến trong JavaScript.",
     "date": "2025-10-09",
@@ -72,7 +72,7 @@
     "tags": ["JavaScript"]
   },
   {
-    "slug": "10Java_JS_OOP",
+    "slug": "10Java_JS_LTM",
     "title": "Java & JS Lập Trình Hướng Đối Tượng",
     "excerpt": "So sánh cách triển khai OOP giữa Java và JavaScript qua ví dụ cụ thể.",
     "date": "2025-10-10",
@@ -80,7 +80,7 @@
     "tags": ["Java", "JavaScript"]
   },
   {
-    "slug": "11GGColab_PythonCoBan",
+    "slug": "11GGColab",
     "title": "GG Colab Python Cơ Bản",
     "excerpt": "Hướng dẫn khởi đầu với Google Colab cho lập trình Python nhanh gọn.",
     "date": "2025-10-11",
@@ -88,7 +88,7 @@
     "tags": ["Python"]
   },
   {
-    "slug": "12AI_MachineLearning",
+    "slug": "12HocMay_ThongSo",
     "title": "Học Máy Tổng Quan",
     "excerpt": "Giới thiệu nền tảng về học máy, dữ liệu huấn luyện và mô hình cơ bản.",
     "date": "2025-10-12",
@@ -96,7 +96,7 @@
     "tags": ["AI", "MachineLearning"]
   },
   {
-    "slug": "13AI_DeepLearning",
+    "slug": "13HocSau_DanhGia",
     "title": "Học Sâu & Mạng Neural",
     "excerpt": "Tổng quan về Deep Learning, mạng neural, và ứng dụng thực tế.",
     "date": "2025-10-13",
@@ -104,7 +104,7 @@
     "tags": ["AI", "DeepLearning"]
   },
   {
-    "slug": "14AI_Optimization",
+    "slug": "14KyThuatToiUu",
     "title": "Kỹ Thuật Tối Ưu Mô Hình",
     "excerpt": "Các kỹ thuật fine-tuning và regularization giúp mô hình hoạt động tốt hơn.",
     "date": "2025-10-14",
